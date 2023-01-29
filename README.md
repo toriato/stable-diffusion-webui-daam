@@ -8,7 +8,7 @@ Clone this repository to extension folder.
 
 # How to use
 
-Select "Daam script" from the script drop-down. Enter the 'attention text' (must be a string contained in the prompt ) and run.
+After installation "Attention Heatmap" appears as its own submenu below the generation settings/above the script dropdown. Enter the 'attention text' (must be a string contained in the prompt ) and run.
 An overlapping image with a heatmap for each attention will be generated along with the original image.
 Images will now be created in the default output directory.
 
