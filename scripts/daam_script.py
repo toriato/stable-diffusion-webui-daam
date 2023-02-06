@@ -288,7 +288,9 @@ class Script(scripts.Script):
                             img : Image.Image = utils.image_overlay_heat_map(params.image, heat_map_img, alpha=self.alpha, caption=caption, image_scale=self.heatmap_image_scale)
 
                             fullfn_without_extension, extension = os.path.splitext(params.filename) 
-                            full_filename = fullfn_without_extension + "_" + attention +  ("_" + self.attn_captions[i] if self.attn_captions[i] else "") + extension
+                            if not os.path.exists(fullfn_without_extension):
+                                os.makedirs(fullfn_without_extension)
+                            full_filename = fullfn_without_extension + "/" + attention + ("_" + self.attn_captions[i] if self.attn_captions[i] else "") + extension
                             
                             if self.use_grid:
                                 heatmap_images.append(img)
