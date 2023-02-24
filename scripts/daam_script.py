@@ -119,7 +119,7 @@ class Script(scripts.Script):
         if not self.enabled:
             return
         
-        styled_prompt = prompts[0]         
+        styled_prompt = attention_texts
         
         embedder = None
         if type(p.sd_model.cond_stage_model) == sd_hijack_clip.FrozenCLIPEmbedderWithCustomWords or \
@@ -265,9 +265,9 @@ class Script(scripts.Script):
         if self.tracers is not None and len(self.attentions) > 0:
             for i, tracer in enumerate(self.tracers):
                 with torch.no_grad():
-                    styled_prompot = shared.prompt_styles.apply_styles_to_prompt(params.p.prompt, params.p.styles)
+                    styled_prompt = shared.prompt_styles.apply_styles_to_prompt(params.p.prompt+","+params.p.negative_prompt, params.p.styles)
                     try:
-                        global_heat_map = tracer.compute_global_heat_map(self.prompt_analyzer, styled_prompot, batch_pos)              
+                        global_heat_map = tracer.compute_global_heat_map(self.prompt_analyzer, styled_prompt, batch_pos)
                     except:
                         continue
                     
